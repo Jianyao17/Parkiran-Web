@@ -1,0 +1,8 @@
+body {
+    padding-top: 60px;
+}
+
+.sticky-offset {
+    top: 64px;
+    margin-bottom: -150px;
+}
