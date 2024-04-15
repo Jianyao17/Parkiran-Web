@@ -14,8 +14,7 @@
     {{-- CSS Style --}}
     <link rel="stylesheet" href="/css/main.css">
 
-    @livewireStyles
-    <title>{{ $page ?? '' }}</title>
+    <title>Login Parkiran Web</title>
 </head>
 
 <body>
@@ -24,18 +23,29 @@
             <div class="px-2 py-2 bg-body-tertiary">
                 <h2 class="text-center">Login Parkiran</h2>
             </div>
-            <div class="px-4 mt-3">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control">
-                </div>
-                <div class="py-4 d-grid">
-                    <button class="btn btn-primary">Login</button>
-                </div>
+            <div class="px-4 mt-4">
+                <form action="/login" method="POST">
+                    @csrf
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control @error('username') is-invalid @enderror" 
+                            name="username" id="username" value="{{ old('username') }}" placeholder="" autofocus>
+                        <label for="username">Username</label>
+                        @error('username')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                            name="password" id="password" placeholder="">
+                        <label for="password">Password</label>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="py-4 d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg fw-medium">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -44,7 +54,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-    @livewireScripts
 </body>
 
 </html>

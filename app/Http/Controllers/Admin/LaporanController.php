@@ -8,6 +8,7 @@ class LaporanController extends Component
 {
     public function render()
     {
-        return view('admin.laporan')->with('page', 'Laporan');
+        return view('admin.laporan')
+            ->extends('_layouts.base-admin', ['page' => 'Laporan']);
     }
 }

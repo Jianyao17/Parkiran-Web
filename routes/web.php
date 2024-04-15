@@ -3,6 +3,13 @@
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\RuangParkirController;
+use App\Http\Controllers\Admin\ParkirViewController;
+
+use App\Http\Controllers\Parkiran\ParkirKeluarController;
+use App\Http\Controllers\Parkiran\ParkirMasukController;
+use App\Http\Controllers\Parkiran\ParkirRuangController;
+
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +27,15 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::get('/users', [UserController::class, 'render']);
-Route::get('/laporan', [LaporanController::class, 'render']);
-Route::get('/ruang-parkir', [RuangParkirController::class, 'render']);
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/users', UserController::class);
+Route::get('/laporan', LaporanController::class);
+Route::get('/ruang-parkir', RuangParkirController::class);
+Route::get('/parkiran', ParkirViewController::class);
+
+
+Route::get('/parkiran/masuk', ParkirMasukController::class);
+Route::get('/parkiran/keluar', ParkirKeluarController::class);
+Route::get('/parkiran/set-ruang', ParkirRuangController::class);
