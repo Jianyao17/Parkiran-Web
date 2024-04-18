@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div id="rightBox" class="col-6 p-2">
+            <div wire:ignore.self id="rightBox" class="col-6 p-2">
                 <h5>Ruang Parkir</h5>
                 <ul class="nav nav-tabs scrollable bg-body-tertiary rounded-top-2" id="ruangPrakirTab" role="tablist">
                     <li class="nav-item" role="presentation">

@@ -10,7 +10,6 @@ let m_ruangKendaraan = [];
 let m_kendaraan = [];
 let selected = null
 
-
 function UpdateKendaraanMasuk(jumlah) 
 {
     m_ruangKendaraan.push(m_container);
@@ -83,10 +82,7 @@ function InsertKendaraan(ruang, kendaraan)
     bodyText.innerHTML = " ";
     
     let idRuang = ruang.querySelector(".id-ruang");
-    if (idRuang) {
-        bodyText.innerHTML = idRuang.innerHTML;
-        idRuang.innerHTML = " ";
-    }
+    if (idRuang) bodyText.innerHTML = idRuang.innerHTML;
 
     ruang.classList.remove("hovered");
     ruang?.appendChild(kendaraan);
@@ -101,9 +97,6 @@ function EventRuangKendaraan(ruangKendaraan) {
 
     ruangKendaraan.addEventListener("dragleave", () => {
         ruangKendaraan.classList.remove("hovered");
-
-        let idRuang = ruangKendaraan.querySelector(".id-ruang");
-        if(idRuang) idRuang.innerHTML = ruangKendaraan.id;
     })
 
     ruangKendaraan.addEventListener("drop", () => {
@@ -128,10 +121,6 @@ function EventKendaraan(kendaraan) {
 
     kendaraan.addEventListener("dragend", () => {
         selected = null;
-    })
-
-    kendaraan.addEventListener("drag", () => {
-        updateDisplay = false;
     })
 }
 

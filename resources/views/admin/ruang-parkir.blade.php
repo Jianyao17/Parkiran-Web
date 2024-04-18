@@ -25,9 +25,9 @@
                 <td class="align-middle">A1 - A12</td>
                 <td class="align-middle">12</td>
                 <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal">
+                        <i class="bi bi-pencil-square me-1"></i> Edit </button>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRuangModal"><i class="bi bi-trash3 me-1"></i> Hapus </button>
                 </td>
             </tr>
             <tr>
@@ -111,10 +111,10 @@
     </table>
 
     {{-- Tambah Modal Window --}}
-    <div class="modal" id="tambahRuangModal" tabindex="-1" aria-labelledby="tambahRuangModalLabel"
+    <div wire:ignore.self class="modal" id="tambahRuangModal" tabindex="-1" aria-labelledby="tambahRuangModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">
-            <form action="" method="POST">
+            <form wire:submit.prevent="store">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -124,23 +124,30 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="namaRuang" class="form-label">Nama Ruang</label>
-                            <input type="text" id="namaRuang" class="form-control">
+                            <label class="form-label">Nama Ruang</label>
+                            <input wire:model="nama_ruang" class="form-control @error('nama_ruang') is-invalid @enderror"
+                                type="text" value="{{ old('nama_ruang') }}" id="nama_ruang" autofocus>
+                            @error('nama_ruang')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="inputGroup" class="form-label">Masukan Kapasitas & Kode Ruang</label>
+                            <label class="form-label">Masukan Kapasitas & Kode Ruang</label>
                             <div class="input-group flex-nowrap" id="inputGroup">
-                                <span class="input-group-text">Kapasitas</span>
-                                <input type="number" id="kapasitas" class="form-control">
                                 <span class="input-group-text">Kode Ruang</span>
-                                <input type="text" id="kodeRuang" class="form-control" placeholder="e.g A">
+                                <input class="form-control" id="kode" name="kode" value="{{ old('kode') }}" type="text" placeholder="e.g A">
+                                <span class="input-group-text">Kapasitas</span>
+                                <input class="form-control" id="kapasitas" name="kapasitas" value="{{ old('kapasitas') }}" type="number">
                             </div>
+                            @error('kode_ruang')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="outputField" class="form-label">Kode ruang yang dihasilkan :</label>
-                            <div class="form-control bg-body-tertiary" id="outputField">
-                                A1, A2, A3, A4, A5, A6, A7
-                            </div>
+                            <label class="form-label">Kode ruang yang dihasilkan :</label>
+                            <textarea class="form-control bg-body-tertiary" id="outputField" placeholder="none" disabled>
+                                {{-- A1, A2, A3, A4, A5, A6, A7 --}}
+                            </textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -156,7 +163,7 @@
     <div class="modal" id="editRuangModal" tabindex="-1" aria-labelledby="editRuangModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">
-            <form action="" method="POST">
+            <form  wire:submit.prevent="update">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -166,23 +173,30 @@
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="namaRuang" class="form-label">Nama Ruang</label>
-                            <input type="text" id="namaRuang" class="form-control">
+                            <label class="form-label">Nama Ruang</label>
+                            <input wire:model="nama_ruang" class="form-control @error('nama_ruang') is-invalid @enderror"
+                                type="text" value="{{ old('nama_ruang') }}" id="nama_ruang" autofocus>
+                            @error('nama_ruang')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="inputGroup" class="form-label">Masukan Kapasitas & Kode Ruang</label>
+                            <label class="form-label">Masukan Kapasitas & Kode Ruang</label>
                             <div class="input-group flex-nowrap" id="inputGroup">
-                                <span class="input-group-text">Kapasitas</span>
-                                <input type="number" id="kapasitas" class="form-control">
                                 <span class="input-group-text">Kode Ruang</span>
-                                <input type="text" id="kodeRuang" class="form-control" placeholder="e.g A">
+                                <input class="form-control" id="kode" name="kode" value="{{ old('kode') }}" type="text" placeholder="e.g A">
+                                <span class="input-group-text">Kapasitas</span>
+                                <input class="form-control" id="kapasitas" name="kapasitas" value="{{ old('kapasitas') }}" type="number">
                             </div>
+                            @error('kode_ruang')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="outputField" class="form-label">Kode ruang yang dihasilkan :</label>
-                            <div class="form-control bg-body-tertiary" id="outputField">
-                                A1, A2, A3, A4, A5, A6, A7
-                            </div>
+                            <label class="form-label">Kode ruang yang dihasilkan :</label>
+                            <textarea class="form-control bg-body-tertiary" id="outputField" placeholder="none" disabled>
+                                {{-- A1, A2, A3, A4, A5, A6, A7 --}}
+                            </textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -193,4 +207,48 @@
             </form>
         </div>
     </div>
+
+    {{-- Delete Modal Window --}}
+    <div wire:ignore.self class="modal" id="deleteRuangModal" tabindex="-1" aria-labelledby="deleteRuangModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Ruang Parkir</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Apakah anda yakin ingin menghapus Ruang?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" wire:click="delete">
+                        <i class="bi bi-trash3 me-1"></i> Hapus </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const kapasitas_ruang = document.querySelector("#kapasitas");
+        const kode_ruang = document.querySelector("#kode");
+        const display = document.querySelector("#outputField");
+
+        kapasitas_ruang.addEventListener("change", GenerateRuangParkir);
+        kode_ruang.addEventListener("change", GenerateRuangParkir);
+
+        function GenerateRuangParkir()
+        {
+            let ruang_parkir = [];
+            let n = kapasitas_ruang.value;
+
+            for (let i = 0; i < n; i++) {
+                ruang_parkir.push(kode_ruang.value + i);
+            }
+
+            display.value = ruang_parkir;
+        }
+
+        window.addEventListener('close-modal', e => {
+            $('.modal').modal('hide');
+        })
+    </script>
 </div>
