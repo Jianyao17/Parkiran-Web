@@ -15,98 +15,30 @@
                 <th scope="col">Nama Ruang</th>
                 <th scope="col">Range Kode</th>
                 <th scope="col">Kapasitas</th>
+                <th scope="col">Last Update</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <th class="align-middle" scope="row">1</th>
-                <td class="align-middle">Lantai-1</td>
-                <td class="align-middle">A1 - A12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal">
-                        <i class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteRuangModal"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle">Lantai-2</td>
-                <td class="align-middle">B1 - B12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">3</th>
-                <td class="align-middle">Lantai-3</td>
-                <td class="align-middle">C1 - C12</td>
-                <td class="align-middle">12</td>
-                <td class="align-middle">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editRuangModal"><i
-                            class="bi bi-pencil-square me-1"></i> Edit </button>
-                    <button class="btn btn-danger"><i class="bi bi-trash3 me-1"></i> Hapus </button>
-                </td>
-            </tr>
+            @foreach ($ruang_parkir as $ruangan)
+                <tr>
+                    <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
+                    <td class="align-middle">{{ $ruangan['nama_ruang'] }}</td>
+                    <td class="align-middle">
+                        {{ $ruangan['kode_ruang'] . '1' }} - {{ $ruangan['kode_ruang'] . $ruangan['kapasitas'] }}
+                    </td>
+                    <td class="align-middle">{{ $ruangan['kapasitas'] }}</td>
+                    <td class="align-middle">{{ $ruangan['updated_at'] }}</td>
+                    <td class="align-middle">
+                        <button class="btn btn-primary" wire:click="editRuang('{{$ruangan['nama_ruang']}}')"
+                            data-bs-toggle="modal" data-bs-target="#editRuangModal">
+                            <i class="bi bi-pencil-square me-1"></i> Edit </button>
+                        <button class="btn btn-danger" wire:click="deleteRuang('{{$ruangan['nama_ruang']}}')"
+                            data-bs-toggle="modal" data-bs-target="#deleteRuangModal">
+                            <i class="bi bi-trash3 me-1"></i> Hapus </button>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
@@ -119,40 +51,53 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Ruang</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Nama Ruang</label>
-                            <input wire:model="nama_ruang" class="form-control @error('nama_ruang') is-invalid @enderror"
-                                type="text" value="{{ old('nama_ruang') }}" id="nama_ruang" autofocus>
+                            <input wire:model="nama_ruang"
+                                class="form-control @error('nama_ruang') is-invalid @enderror" type="text"
+                                value="{{ old('nama_ruang') }}" name="nama_ruang" autofocus>
                             @error('nama_ruang')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Masukan Kapasitas & Kode Ruang</label>
-                            <div class="input-group flex-nowrap" id="inputGroup">
+                            <label for="inputGroup" class="form-label">Masukan Kapasitas & Kode Ruang</label>
+                            <div class="input-group has-validation" id="inputGroup">
                                 <span class="input-group-text">Kode Ruang</span>
-                                <input class="form-control" id="kode" name="kode" value="{{ old('kode') }}" type="text" placeholder="e.g A">
+                                <input class="form-control  @error('kode_ruang') is-invalid @enderror"
+                                    wire:model="kode_ruang" id="kode1" name="kode" value="{{ old('kode') }}"
+                                    type="text" placeholder="e.g A">
                                 <span class="input-group-text">Kapasitas</span>
-                                <input class="form-control" id="kapasitas" name="kapasitas" value="{{ old('kapasitas') }}" type="number">
+                                <input class="form-control  @error('kapasitas') is-invalid @enderror"
+                                    wire:model="kapasitas" id="kapasitas1" name="kapasitas"
+                                    value="{{ old('kapasitas') }}" type="number">
+                                <div class="mb-3 invalid-feedback position-relative">
+                                    @error('kode_ruang')
+                                        <div class="position-absolute start-0">{{ $message }}</div>
+                                    @enderror
+                                    @error('kapasitas')
+                                        <div class="position-absolute end-0">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('kode_ruang')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Kode ruang yang dihasilkan :</label>
-                            <textarea class="form-control bg-body-tertiary" id="outputField" placeholder="none" disabled>
+                            <label for="outputField1" class="form-label">Kode ruang yang dihasilkan :</label>
+                            <textarea class="form-control bg-body-tertiary @error('fails') is-invalid @enderror" id="outputField1"
+                                placeholder="none" style="min-height: 90px" disabled>
                                 {{-- A1, A2, A3, A4, A5, A6, A7 --}}
                             </textarea>
+                            @error('fails')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Tambah</button>
+                        <button type="submit" class="btn btn-primary">Tambah Ruang</button>
                     </div>
                 </div>
             </form>
@@ -160,10 +105,10 @@
     </div>
 
     {{-- Edit Modal Window --}}
-    <div class="modal" id="editRuangModal" tabindex="-1" aria-labelledby="editRuangModalLabel"
+    <div wire:ignore.self class="modal" id="editRuangModal" tabindex="-1" aria-labelledby="editRuangModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">
-            <form  wire:submit.prevent="update">
+            <form wire:submit.prevent="update">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -174,29 +119,43 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label">Nama Ruang</label>
-                            <input wire:model="nama_ruang" class="form-control @error('nama_ruang') is-invalid @enderror"
-                                type="text" value="{{ old('nama_ruang') }}" id="nama_ruang" autofocus>
+                            <input wire:model="nama_ruang"
+                                class="form-control @error('nama_ruang') is-invalid @enderror" type="text"
+                                value="{{ old('nama_ruang') }}" name="nama_ruang" autofocus>
                             @error('nama_ruang')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Masukan Kapasitas & Kode Ruang</label>
-                            <div class="input-group flex-nowrap" id="inputGroup">
+                            <label for="inputGroup" class="form-label">Masukan Kapasitas & Kode Ruang</label>
+                            <div class="input-group has-validation" id="inputGroup">
                                 <span class="input-group-text">Kode Ruang</span>
-                                <input class="form-control" id="kode" name="kode" value="{{ old('kode') }}" type="text" placeholder="e.g A">
+                                <input class="form-control  @error('kode_ruang') is-invalid @enderror"
+                                    wire:model="kode_ruang" id="kode1" name="kode"
+                                    value="{{ old('kode') }}" type="text" placeholder="e.g A">
                                 <span class="input-group-text">Kapasitas</span>
-                                <input class="form-control" id="kapasitas" name="kapasitas" value="{{ old('kapasitas') }}" type="number">
+                                <input class="form-control  @error('kapasitas') is-invalid @enderror"
+                                    wire:model="kapasitas" id="kapasitas1" name="kapasitas"
+                                    value="{{ old('kapasitas') }}" type="number">
+                                <div class="mb-3 invalid-feedback position-relative">
+                                    @error('kode_ruang')
+                                        <div class="position-absolute start-0">{{ $message }}</div>
+                                    @enderror
+                                    @error('kapasitas')
+                                        <div class="position-absolute end-0">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
-                            @error('kode_ruang')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Kode ruang yang dihasilkan :</label>
-                            <textarea class="form-control bg-body-tertiary" id="outputField" placeholder="none" disabled>
+                            <label for="outputField1" class="form-label">Kode ruang yang dihasilkan :</label>
+                            <textarea class="form-control bg-body-tertiary @error('fails') is-invalid @enderror" id="outputField2"
+                                placeholder="none" style="min-height: 90px" disabled>
                                 {{-- A1, A2, A3, A4, A5, A6, A7 --}}
                             </textarea>
+                            @error('fails')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -209,46 +168,67 @@
     </div>
 
     {{-- Delete Modal Window --}}
-    <div wire:ignore.self class="modal" id="deleteRuangModal" tabindex="-1" aria-labelledby="deleteRuangModalLabel"
-        aria-hidden="true">
+    <div wire:ignore.self class="modal" id="deleteRuangModal" tabindex="-1"
+        aria-labelledby="deleteRuangModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Ruang Parkir</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">Apakah anda yakin ingin menghapus Ruang?</div>
+                <div class="modal-body">Apakah anda yakin ingin menghapus {{ $nama_ruang ?? 'Ruang' }}?</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger" wire:click="delete">
-                        <i class="bi bi-trash3 me-1"></i> Hapus </button>
+                        <i class="bi bi-trash3 me-1"></i> Hapus Ruang </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const kapasitas_ruang = document.querySelector("#kapasitas");
-        const kode_ruang = document.querySelector("#kode");
-        const display = document.querySelector("#outputField");
+        const input_kode = document.getElementsByName("kode");
+        const input_kapasitas = document.getElementsByName("kapasitas");
 
-        kapasitas_ruang.addEventListener("change", GenerateRuangParkir);
-        kode_ruang.addEventListener("change", GenerateRuangParkir);
+        const display1 = document.querySelector("#outputField1");
+        const display2 = document.querySelector("#outputField2");
 
-        function GenerateRuangParkir()
-        {
+        input_kode.forEach(kode => {
+            input_kapasitas.forEach(kapasitas => {
+                kode.addEventListener("change", () => {
+                    GenerateRuangParkir(kapasitas.value, kode.value);
+                });
+                kapasitas.addEventListener("change", () => {
+                    GenerateRuangParkir(kapasitas.value, kode.value);
+                });
+            });
+        });
+
+        function GenerateRuangParkir(kapasitas, kodeRuang) {
             let ruang_parkir = [];
-            let n = kapasitas_ruang.value;
+            let n = kapasitas;
 
             for (let i = 0; i < n; i++) {
-                ruang_parkir.push(kode_ruang.value + i);
+                ruang_parkir.push(kodeRuang + (i + 1));
             }
 
-            display.value = ruang_parkir;
+            display1.value = ruang_parkir.join(', ');
+            display2.value = ruang_parkir.join(', ');
+
+            return ruang_parkir;
         }
 
         window.addEventListener('close-modal', e => {
             $('.modal').modal('hide');
-        })
+        });
+
+        document.addEventListener('livewire:load', () => {
+            const livewire = @this;
+            const updateModal = document.getElementById("editRuangModal");
+
+            updateModal.addEventListener('hidden.bs.modal', () => {
+                livewire.resetValue();
+            });
+        });
     </script>
 </div>

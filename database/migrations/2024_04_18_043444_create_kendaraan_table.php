@@ -25,8 +25,8 @@ class CreateKendaraanTable extends Migration
 
         Schema::create('ruang_parkir', function (Blueprint $table) {
             $table->id('id_ruang');
-            $table->string('kode_ruang')->unique();
             $table->string('nama_ruang');
+            $table->string('kode_ruang')->unique();
             $table->string('status');
             $table->timestamps();
         });

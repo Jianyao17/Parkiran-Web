@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    {{-- Add Modal Window --}}
+    {{-- Edit Modal Window --}}
     <div wire:ignore.self class="modal" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel"
         aria-hidden="true">
         <div class="modal-dialog ">

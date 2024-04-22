@@ -26,6 +26,7 @@
                 <th scope="col">Tempat Parkir</th>
                 <th scope="col">Waktu Masuk</th>
                 <th scope="col">Waktu Keluar</th>
+                <th scope="col">Biaya (Rp)</th>
                 <th scope="col">Status</th>
             </tr>
         </thead>
@@ -36,7 +37,8 @@
                 <td class="align-middle">Lantai-1 | A17</td>
                 <td class="align-middle">17/02/2024 - 06:43</td>
                 <td class="align-middle"></td>
-                <td class="align-middle fw-semibold text-success">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-success">
                     <i class="bi bi-square-fill me-1"></i>
                     Active
                 </td>
@@ -47,7 +49,8 @@
                 <td class="align-middle">Lantai-1 | A4</td>
                 <td class="align-middle">23/02/2024 - 06:43</td>
                 <td class="align-middle">23/02/2024 - 10:21</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -58,7 +61,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -69,7 +73,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -80,7 +85,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -91,7 +97,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -102,7 +109,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -113,7 +121,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -124,7 +133,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -135,7 +145,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -146,7 +157,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -157,7 +169,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -168,7 +181,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -179,7 +193,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -190,7 +205,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -201,7 +217,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>
@@ -212,7 +229,8 @@
                 <td class="align-middle">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle fw-semibold text-primary">
+                <td class="align-middle">Rp 20.000</td>
+                <td class="align-middle fw-medium text-primary">
                     <i class="bi bi-square-fill me-1"></i>
                     Finished
                 </td>

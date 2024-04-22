@@ -4,7 +4,7 @@
             <div id="leftBox" class="col-6 p-2">
                 <h5>Kendaraan Masuk</h5>
                 <div class="nav nav-tabs rounded-top-2 bg-body-tertiary">
-                    <div class="nav-link disabled fw-semibold text-dark">Kendaraan Masuk : {{ $jumlahMasuk }}</div>
+                    <div class="nav-link disabled fw-medium text-dark">Kendaraan Masuk : {{ $jumlahMasuk }}</div>
                 </div>
                 <div class="tab-content border-start border-end border-bottom rounded-bottom-2"
                     style="height: 60vh; overflow-y: auto">

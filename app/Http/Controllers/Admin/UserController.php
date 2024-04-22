@@ -13,31 +13,32 @@ class UserController extends Component
     public $users;
 
     public $roles = ['Admin', 'Petugas-Masuk', 'Petugas-Ruang', 'Petugas-Keluar'];
-    protected $listeners = ['usersUpdated' => 'render'];
 
 
     public function render()
     {
         $this->users = User::all();
 
-        return view('admin.users', ['number' => $this->users])
+        return view('admin.users')
             ->extends('_layouts.base-admin', ['page' => 'Users']);
     }
 
     public function store()
     {
-        $this->validate([ // Validate data to be created
-            'username' => 'required|unique:users,name|min:3|max:255',
+        // Validate data to be created
+        $this->validate([ 
+            'username' => 'required|unique:users,name|min:4|max:255',
             'password' => 'required|string|min:8|max:255',
             'role' => ['required', Rule::in($this->roles)],
             'no_telp' => 'required|numeric'
         ]); 
 
+        // Create data in database
         User::create([
             'name' => $this->username,
             'password' => Hash::make($this->password),
+            'no_telp' => $this->no_telp,
             'role' => $this->role,
-            'no_telp' => $this->no_telp
         ]);
 
         $this->dispatchBrowserEvent('notify', 
@@ -45,14 +46,15 @@ class UserController extends Component
 
         $this->resetValue();
         $this->dispatchBrowserEvent('close-modal');
-        $this->emit('usersUpdated');
     }
 
     public function editUser($id) 
     {
         $user = User::find($id);
 
-        if ($user == null) {
+        if (!$user) 
+        {
+            $this->dispatchBrowserEvent('close-modal');
             $this->dispatchBrowserEvent('notify', 
             [ 'type' => 'failed', 'message' => 'User Tidak Ditemukan']);  
             return;
@@ -66,34 +68,36 @@ class UserController extends Component
 
     public function update() 
     {
-        $this->validate([ // Validate data to be updated
-            'username' => 'required|min:3|max:255',
+        // Validate data to be updated
+        $this->validate([ 
+            'username' => 'required|min:4|max:255|unique:users,name,'.$this->user_id,
             'password' => 'required|min:8|max:255',
             'role' => ['required', Rule::in($this->roles)],
             'no_telp' => 'required|numeric'
         ]);
         
+        // Update data in database
         User::find($this->user_id)->update([
             'name' => $this->username,
             'password' => Hash::make($this->password),
+            'no_telp' => $this->no_telp,
             'role' => $this->role,
-            'no_telp' => $this->no_telp
         ]);
 
-        // Update User Database here
         $this->dispatchBrowserEvent('notify', 
         [ 'type' => 'success', 'message' => 'User Berhasil Diperbarui']);
 
         $this->resetValue();
         $this->dispatchBrowserEvent('close-modal');
-        $this->emit('usersUpdated');
     }
 
     public function deleteUser($id)
     {
         $user = User::find($id);
 
-        if ($user == null) {
+        if (!$user) 
+        {
+            $this->dispatchBrowserEvent('close-modal');
             $this->dispatchBrowserEvent('notify', 
             [ 'type' => 'failed', 'message' => 'User Tidak Ditemukan']);  
             return;
@@ -112,7 +116,6 @@ class UserController extends Component
 
         $this->resetValue();
         $this->dispatchBrowserEvent('close-modal');
-        $this->emit('usersUpdated');
     }
     
 

@@ -20,15 +20,15 @@
 <body>
     <div class="container-fluid d-flex justify-content-center align-items-center">
         <div class="row border rounded-3 shadow-sm" style="width: 400px">
-            <div class="px-2 py-2 bg-body-tertiary">
-                <h2 class="text-center">Login Parkiran</h2>
+            <div class="pt-3 p-2 bg-body-tertiary border-top border-3 border-primary rounded-top-3">
+                <h2 class="text-center fw-medium fs-3">Login Parkiran</h2>
             </div>
-            <div class="px-4 mt-4">
+            <div class="px-4 pt-4 rounded-bottom-3">
                 <form action="/login" method="POST">
                     @csrf
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control @error('username') is-invalid @enderror" 
-                            name="username" id="username" value="{{ old('username') }}" placeholder="" autofocus>
+                            name="username" id="username" value="{{ old('username') }}" autofocus>
                         <label for="username">Username</label>
                         @error('username')
                             <div class="invalid-feedback">{{ $message }}</div>
