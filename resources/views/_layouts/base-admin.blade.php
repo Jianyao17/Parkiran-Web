@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-2 bg-body-tertiary border-end border-1">
                 {{-- Sidebar --}}
-                <aside class="sticky-top sticky-sidebar vh-100 overflow-auto ">
+                <aside class="sticky-sidebar overflow-auto ">
                     <div class="d-flex flex-column gap-2 m-2 my-3">
                         <a class="btn btn-outline-primary @if ($page == 'Laporan') active @endif px-3 text-start"
                             href="/laporan">

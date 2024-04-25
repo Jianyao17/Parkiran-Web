@@ -3,13 +3,13 @@
     <p>Laporan Pendapatan Parkiran</p>
 
     <div class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
-        <select class="flex-grow-0 form-select bg-body-tertiary" id="monthFilter">
+        <select class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="monthFilter">
             <option value="all">All</option>
             <option value="january">January</option>
             <option value="february">February</option>
             <option value="maret">Maret</option>
         </select>
-        <div class="col-10 ps-2">
+        <div class="col-10 ms-2 rounded-2 shadow-sm">
             <input type="search" class="form-control" placeholder="Cari Laporan">
         </div>
     </div>

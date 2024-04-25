@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Mavinoo\Batch\Traits\HasBatch;
 
 class RuangParkir extends Model
 {
-    use HasFactory;
+    use HasFactory, HasBatch;
 
     protected $table = 'ruang_parkir';
 
@@ -40,7 +41,7 @@ class RuangParkir extends Model
                 'updated_at' => $value['updated_at'],
             ];
         }
-        return $ruang_parkir;
+        return collect($ruang_parkir)->sortBy('nama_ruang')->values()->all();
     }
 
     public static function StoreRuang($nama, $kode, $kapasitas) 
@@ -71,8 +72,7 @@ class RuangParkir extends Model
 
     public static function UpdateRuang($target_ruang, $nama, $kode, $kapasitas)
     {
-        $ruangan = self::where('nama_ruang', $target_ruang);
-        $count = $ruangan->count();
+        $count = self::where('nama_ruang', $target_ruang)->count();
 
         // Make Multiple Record of Ruang
         $ruangParkir = array();
@@ -110,15 +110,24 @@ class RuangParkir extends Model
             else if ($kapasitas < $count) 
             {
                 // Delete Some Record
-                $ruangan->limit($count - $kapasitas)->delete();
+                self::where('nama_ruang', $target_ruang)->limit($count - $kapasitas)->delete();
             }
     
             $ruang_id = self::where('nama_ruang', $target_ruang)->pluck('id_ruang')->toArray();
-    
-            // Update Ruang Database
+            $ruang_parkir = array();
+
+            // Make Final Array with ruang_id
             foreach ($ruangParkir as $key => $ruang) {
-                self::where('id_ruang', $ruang_id[$key])->update($ruang);
-            }    
+                $ruang_parkir[] = [
+                    'id_ruang' => $ruang_id[$key],
+                    'nama_ruang' => $ruang['nama_ruang'],
+                    'kode_ruang' => $ruang['kode_ruang'],
+                    'updated_at' => $ruang['updated_at'],
+                ];
+            }
+
+            // Update Ruang Database
+            self::batchUpdate($ruang_parkir, 'id_ruang');   
         }
         return $validatorFails;
     }

@@ -117,7 +117,7 @@ class RuangParkirController extends Component
         RuangParkir::DeleteRuang($this->nama_ruang);
 
         $this->dispatchBrowserEvent('notify', 
-        [ 'type' => 'success', 'message' => 'User Berhasil Dihapus']);
+        [ 'type' => 'success', 'message' => 'Ruang Berhasil Dihapus']);
 
         $this->resetValue();
         $this->dispatchBrowserEvent('close-modal');

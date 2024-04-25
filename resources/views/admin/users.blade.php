@@ -22,10 +22,19 @@
             @foreach ($users as $user)
                 <tr>
                     <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
-                    <td class="align-middle">{{ $user->name }}</td>
-                    <td class="align-middle">{{ $user->role }}</td>
+                    <td class="align-middle fw-normal">{{ $user->name }}</td>
+                    <td class="align-middle fst-italic">{{ $user->role }}</td>
                     <td class="align-middle">{{ $user->no_telp }}</td>
-                    <td class="align-middle">{{ $user->created_at }}</td>
+                    <td class="align-middle">
+                        {{ $user->created_at->format('H:i') }} | 
+                        @if ($user->created_at->isToday())
+                            Hari Ini
+                        @elseif ($user->created_at->isYesterday())
+                            Kemarin
+                        @else
+                            {{ $user->created_at->format('d-M-Y') }}
+                        @endif
+                    </td>
                     <td class="align-middle">
                         <button class="btn btn-primary" wire:click="editUser({{ $user->id }})"
                             data-bs-target="#editUserModal" data-bs-toggle="modal">

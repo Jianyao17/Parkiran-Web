@@ -12,18 +12,42 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     {{-- CSS Style --}}
-    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        
+        body {    
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+
+            font-family: "Roboto", sans-serif;
+        }
+
+        .bg-image {
+            position: absolute;
+            height: 100vh;
+            width: 100%;
+            z-index: -1;
+
+            background-image: url("/img/parking-cars.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 
     <title>Login Parkiran Web</title>
 </head>
 
 <body>
-    <div class="container-fluid d-flex justify-content-center align-items-center">
-        <div class="row border rounded-3 shadow-sm" style="width: 400px">
+    <div class="bg-image"></div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="border border-top-0 rounded-4 shadow" style="width: 400px;">
             <div class="pt-3 p-2 bg-body-tertiary border-top border-3 border-primary rounded-top-3">
-                <h2 class="text-center fw-medium fs-3">Login Parkiran</h2>
+                <h2 class="text-center fw-semibold fs-3">Login Parkiran</h2>
             </div>
-            <div class="px-4 pt-4 rounded-bottom-3">
+            <div class="px-4 pt-4 bg-white rounded-bottom-3">
                 <form action="/login" method="POST">
                     @csrf
                     <div class="form-floating mb-3">

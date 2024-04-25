@@ -16,11 +16,11 @@ class CreateKendaraanTable extends Migration
         Schema::create('kendaraan', function (Blueprint $table) {
             $table->id('id_kendaraan');
             $table->string('plat_kendaraan')->unique();
-            $table->string('ruang_parkir');
-            $table->dateTime('waktu_masuk');
-            $table->dateTime('waktu_keluar');
-            $table->string('status');
-            $table->double('biaya');
+            $table->string('ruang_parkir')->nullable();
+            $table->dateTime('waktu_masuk')->nullable();
+            $table->dateTime('waktu_keluar')->nullable();
+            $table->string('status')->default('none');
+            $table->double('biaya')->default(0.0);
         });
 
         Schema::create('ruang_parkir', function (Blueprint $table) {

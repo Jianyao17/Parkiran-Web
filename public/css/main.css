@@ -6,8 +6,9 @@ body {
 }
 
 .sticky-sidebar {
+    position: sticky;
+    height: calc(100vh - 64px);
     top: 64px;
-    margin-bottom: -150px;
 }
 
 .sticky-searchbar {

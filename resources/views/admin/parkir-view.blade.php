@@ -3,22 +3,26 @@
     <p>History Parkir Kendaraan</p>
 
     <div class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
-        <select class="flex-grow-0 form-select bg-body-tertiary" id="timeFilter">
-            <option value="hari" selected>Hari Ini</option>
-            <option value="minggu">Minggu Ini</option>
-            <option value="bulan">Bulan Ini</option>
+        <select wire:model="waktu" class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="timeFilter">
+            <option value="Semua" selected>Semua</option>
+            <option value="Hari Ini">Hari Ini</option>
+            <option value="Kemarin">Kemarin</option>
+            <option value="Minggu Ini">Minggu Ini</option>
+            <option value="Bulan Ini">Bulan Ini</option>
+            <option value="Tahun Ini">Tahun Ini</option>
         </select>
-        <div class="col-8 px-2">
-            <input type="search" class="form-control" placeholder="Cari History Parkir Kendaraan">
+        <div class="col-8 mx-2 rounded-2 shadow-sm">
+            <input wire:model="search" type="search" class="form-control" placeholder="Cari History Parkir Kendaraan">
         </div>
-        <select class="flex-grow-0 form-select bg-body-tertiary" id="statusFilter">
-            <option value="active" selected>Active</option>
-            <option value="finished">Finished</option>
+        <select wire:model="status" class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="statusFilter">
+            <option value="All" selected>All</option>
+            <option value="Active">Active</option>
+            <option value="Finished">Finished</option>
         </select>
     </div>
 
     {{-- Parkiran Table --}}
-    <table class="table table-hover">
+    <table wire:poll class="table table-hover">
         <thead class="table-light">
             <tr>
                 <th scope="col">#</th>
@@ -31,202 +35,51 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
+            @foreach ($list_kendaraan as $kendaraan)
+                <tr>
+                    <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
+                    <td class="align-middle fw-bold">{{ $kendaraan->plat_kendaraan }}</td>
+                    <td class="align-middle">{{ $kendaraan->ruang_parkir }}</td>
+                    <td class="align-middle">
+                        @if ($kendaraan->waktu_masuk != null)
+                            {{ $kendaraan->waktu_masuk->format('H:i') }} | 
+                            @if ($kendaraan->waktu_masuk->isToday())
+                                Hari Ini
+                            @elseif ($kendaraan->waktu_masuk->isYesterday())
+                                Kemarin
+                            @else
+                                {{ $kendaraan->waktu_masuk->format('d-M-Y') }}
+                            @endif
+                        @endif
+                    </td>
+                    <td class="align-middle">
+                        @if ($kendaraan->waktu_keluar != null)
+                            {{ $kendaraan->waktu_keluar->format('H:i') }} | 
+                            @if ($kendaraan->waktu_keluar->isToday())
+                                Hari Ini
+                            @elseif ($kendaraan->waktu_keluar->isYesterday())
+                                Kemarin
+                            @else
+                                {{ $kendaraan->waktu_keluar->format('d-M-Y') }}
+                            @endif
+                        @endif
+                    </td>
+                    <td class="align-middle">Rp. {{ number_format($kendaraan->biaya, 2) }}</td>
+                    @if ($kendaraan->status == 'Active')
+                        <td class="align-middle fw-medium text-success">
+                            <i class="bi bi-square-fill me-1"></i> Active 
+                        </td>
+                    @elseif ($kendaraan->status == 'Finished')
+                        <td class="align-middle fw-medium text-primary">
+                            <i class="bi bi-square-fill me-1"></i> Finished 
+                        </td>
+                    @endif
+                </tr>
+            @endforeach
             <tr>
-                <th class="align-middle" scope="row">1</th>
-                <td class="align-middle fw-bold">L532</td>
-                <td class="align-middle">Lantai-1 | A17</td>
-                <td class="align-middle">17/02/2024 - 06:43</td>
-                <td class="align-middle"></td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-success">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Active
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">1</th>
-                <td class="align-middle fw-bold">L214</td>
-                <td class="align-middle">Lantai-1 | A4</td>
-                <td class="align-middle">23/02/2024 - 06:43</td>
-                <td class="align-middle">23/02/2024 - 10:21</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
+                <th class="align-middle" scope="row">17</th>
                 <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
-            <tr>
-                <th class="align-middle" scope="row">2</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle">Lantai-2 | B2</td>
+                <td class="align-middle fst-italic">Lantai-2 | B2</td>
                 <td class="align-middle">28/05/2024 - 08:53</td>
                 <td class="align-middle">28/05/2024 - 13:28</td>
                 <td class="align-middle">Rp 20.000</td>
@@ -237,4 +90,7 @@
             </tr>
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $list_kendaraan->links() }}
+    </div>
 </div>

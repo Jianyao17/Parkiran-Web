@@ -24,16 +24,25 @@
                 <tr>
                     <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
                     <td class="align-middle">{{ $ruangan['nama_ruang'] }}</td>
-                    <td class="align-middle">
+                    <td class="align-middle fst-italic">
                         {{ $ruangan['kode_ruang'] . '1' }} - {{ $ruangan['kode_ruang'] . $ruangan['kapasitas'] }}
                     </td>
                     <td class="align-middle">{{ $ruangan['kapasitas'] }}</td>
-                    <td class="align-middle">{{ $ruangan['updated_at'] }}</td>
                     <td class="align-middle">
-                        <button class="btn btn-primary" wire:click="editRuang('{{$ruangan['nama_ruang']}}')"
+                        {{ $ruangan['updated_at']->format('H:i') }} | 
+                        @if ($ruangan['updated_at']->isToday())
+                            Hari Ini
+                        @elseif ($ruangan['updated_at']->isYesterday())
+                            Kemarin
+                        @else
+                            {{ $ruangan['updated_at']->format('d-M-Y') }}
+                        @endif
+                    </td>
+                    <td class="align-middle">
+                        <button class="btn btn-primary" wire:click="editRuang('{{ $ruangan['nama_ruang'] }}')"
                             data-bs-toggle="modal" data-bs-target="#editRuangModal">
                             <i class="bi bi-pencil-square me-1"></i> Edit </button>
-                        <button class="btn btn-danger" wire:click="deleteRuang('{{$ruangan['nama_ruang']}}')"
+                        <button class="btn btn-danger" wire:click="deleteRuang('{{ $ruangan['nama_ruang'] }}')"
                             data-bs-toggle="modal" data-bs-target="#deleteRuangModal">
                             <i class="bi bi-trash3 me-1"></i> Hapus </button>
                     </td>
@@ -45,7 +54,7 @@
     {{-- Tambah Modal Window --}}
     <div wire:ignore.self class="modal" id="tambahRuangModal" tabindex="-1" aria-labelledby="tambahRuangModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog ">
+        <div class="modal-dialog">
             <form wire:submit.prevent="store">
                 @csrf
                 <div class="modal-content">

@@ -2,7 +2,8 @@
     <div class="row p-5">
         <div class="mb-4 px-0 input-group input-group-lg shadow-sm rounded position-sticky sticky-searchbar">
             <span class="input-group-text"><i class="bi bi-search"></i></span>
-            <input type="search" class="form-control" placeholder="Cari Plat Kendaraan" autofocus>
+            <input wire:model="search" type="search" class="form-control" placeholder="Cari Plat Kendaraan"
+                oninput="this.value = this.value.toUpperCase()" autofocus>
         </div>
 
         {{-- Kendaraan Table --}}
@@ -17,114 +18,27 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <th class="align-middle" scope="row">1</th>
-                    <td class="align-middle fw-medium">L214</td>
-                    <td class="align-middle">Lantai-1 | A4</td>
-                    <td class="align-middle">06:43</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">2</th>
-                    <td class="align-middle fw-medium">K124</td>
-                    <td class="align-middle">Lantai-2 | B2</td>
-                    <td class="align-middle">05:24</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="align-middle" scope="row">3</th>
-                    <td class="align-middle fw-medium">L752</td>
-                    <td class="align-middle">Lantai-1 | A7</td>
-                    <td class="align-middle">08:54</td>
-                    <td class="align-middle">
-                        <button class="btn btn-primary"><i class="bi bi-box-arrow-right"></i> Keluar </button>
-                    </td>
-                </tr>
+                @foreach ($active_kendaraan as $kendaraan)
+                    <tr>
+                        <th class="align-middle fs-5" scope="row">{{ $loop->index + 1 }}</th>
+                        <td class="align-middle fs-5 fw-medium">{{ $kendaraan->plat_kendaraan }}</td>
+                        <td class="align-middle">{{ $kendaraan->ruang_parkir }}</td>
+                        <td class="align-middle">
+                            {{ $kendaraan->waktu_masuk->format('H:i') }} | 
+                            @if ($kendaraan->waktu_masuk->isToday())
+                                Hari Ini
+                            @elseif ($kendaraan->waktu_masuk->isYesterday())
+                                Kemarin
+                            @else
+                                {{ $kendaraan->waktu_masuk->format('d-M-Y') }}
+                            @endif
+                        </td>
+                        <td class="align-middle">
+                            <button wire:click="keluar({{ $kendaraan->id_kendaraan }})" class="btn btn-primary">
+                                <i class="bi bi-box-arrow-right"></i> Keluar </button>
+                        </td>
+                    </tr>
+                @endforeach
                 <tr>
                     <th class="align-middle" scope="row">3</th>
                     <td class="align-middle fw-medium">L752</td>
