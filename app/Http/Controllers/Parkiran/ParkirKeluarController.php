@@ -6,20 +6,23 @@ use App\Events\OnKendaraanUpdate;
 use App\Models\Kendaraan;
 use App\Models\RuangParkir;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ParkirKeluarController extends Component
 {
+    use WithPagination;
+    public $paginationTheme = 'bootstrap';
+
     public $search;
-    public $active_kendaraan;
 
     public function render()
     {
         $kendaraan = Kendaraan::query()->where('status', 'Active')->orderBy('waktu_masuk', 'desc');
         $kendaraan->where('plat_kendaraan', 'like', '%' . $this->search . '%');
 
-        $this->active_kendaraan = $kendaraan->get();
+        $active_kendaraan = $kendaraan->paginate(20);
 
-        return view('parkiran.keluar')
+        return view('parkiran.keluar', ['active_kendaraan' => $active_kendaraan])
             ->extends('_layouts.base', ['page' => 'Parkir Keluar']);        
     }
 

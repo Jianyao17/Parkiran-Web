@@ -24,17 +24,31 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-
-Route::get('/users', UserController::class);
-Route::get('/laporan', LaporanController::class);
-Route::get('/ruang-parkir', RuangParkirController::class);
-Route::get('/parkiran', ParkirViewController::class);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 
-Route::get('/parkiran/masuk', ParkirMasukController::class);
+// Admin Route
+Route::middleware(['auth', 'user-role:Admin'])->group(function() {
+    
+    Route::get('/users', UserController::class);
+    Route::get('/laporan', LaporanController::class);
+    Route::get('/ruang-parkir', RuangParkirController::class);
+    Route::get('/parkiran', ParkirViewController::class);
+});
 
-Route::get('/parkiran/keluar', ParkirKeluarController::class);
+// Petugas Masuk Route
+Route::middleware(['auth', 'user-role:Petugas-Masuk'])->group(function() {
+    Route::get('/parkiran/masuk', ParkirMasukController::class);
+});
 
-Route::get('/parkiran/set-ruang', ParkirRuangController::class);
+// Petugas Keluar
+Route::middleware(['auth', 'user-role:Petugas-Keluar'])->group(function() {
+    Route::get('/parkiran/keluar', ParkirKeluarController::class);
+});
+
+// Petugas Ruang
+Route::middleware(['auth', 'user-role:Petugas-Ruang'])->group(function() {
+    Route::get('/parkiran/set-ruang', ParkirRuangController::class);
+});

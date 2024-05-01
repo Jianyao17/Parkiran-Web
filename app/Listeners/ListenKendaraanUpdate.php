@@ -28,14 +28,12 @@ class ListenKendaraanUpdate
      */
     public function handle(OnKendaraanUpdate $event)
     {
-        // TODO: Uncomment when auth ready
         // Make Cache Event for all user
-        // foreach ($this->users_id as $user) 
-        // {
-        //     $instance_key = 'UpdateKendaraan_' . $user->id;
-        //     Cache::put($instance_key, now(), now()->addMinutes(5));
-        // }
-
-        Cache::put('UpdateKendaraan_', now(), now()->addMinutes(5));
+        foreach ($this->users_id as $user) 
+        {
+            $instance_key = 'UpdateKendaraan_' . $user->id;
+            Cache::forget($instance_key);
+            Cache::put($instance_key, now(), now()->addMinutes(5));
+        }
     }
 }

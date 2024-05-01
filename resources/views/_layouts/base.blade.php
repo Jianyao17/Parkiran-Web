@@ -43,19 +43,24 @@
             <a href="#" class="position-absolute top-50 start-50 translate-middle px-5 py-3 bg-primary-subtle rounded-3 link-underline link-underline-opacity-0">
                 <h3 class="mt-2 text-dark">{{$page ?? 'Parkir Keluar'}}</h3>
             </a>
-            <div class="d-flex">
-                <div class="d-flex flex-row border rounded p-1 px-2 mx-2">
-                    <i class="bi bi-person-workspace me-1 d-flex justify-content-center align-items-center"
-                        style="font-size: 200%"></i>
-                    <div class="mx-2 d-flex flex-column justify-content-center">
-                        <div class="fw-bold lh-sm" style="font-size: 90%"> {{ $user->name ?? 'Arief Wiradrama Tan' }}</div>
-                        <div class="lh-sm" style="font-size: 80%"> Role : {{ $user->role ?? 'Admin' }} </div>
+            @auth
+                <div class="d-flex">
+                    <div class="d-flex flex-row border rounded p-1 px-2 mx-2">
+                        <i class="bi bi-person-workspace me-1 d-flex justify-content-center align-items-center"
+                            style="font-size: 200%"></i>
+                        <div class="mx-2 d-flex flex-column justify-content-center">
+                            <div class="fw-bold lh-sm" style="font-size: 90%"> {{ ucfirst(auth()->user()->username) }}</div>
+                            <div class="lh-sm" style="font-size: 80%"> Role : {{  auth()->user()->role }} </div>
+                        </div>
                     </div>
+                    <form action="/logout"method="post">
+                        @csrf   
+                       <button type="submit" class="btn btn-outline-danger d-flex justify-content-center align-items-center">
+                           <i class="bi bi-box-arrow-right ms-1 " style="font-size: 1.2rem"></i>
+                       </button>
+                    </form>
                 </div>
-                <a class="btn btn-outline-danger d-flex justify-content-center align-items-center" href="/">
-                    <i class="bi bi-box-arrow-right ms-1 " style="font-size: 1.2rem"></i>
-                </a>
-            </div>
+            @endauth
         </div>
     </nav>
     
@@ -69,6 +74,7 @@
     </script>
     <script src="/js/shortcuts.js"></script>
     <script>
+        // Toast Popout Logic
         const toastElement = document.getElementById('liveToast');
 
         window.addEventListener('notify', event => {

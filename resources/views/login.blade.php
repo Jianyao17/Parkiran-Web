@@ -47,6 +47,22 @@
             <div class="pt-3 p-2 bg-body-tertiary border-top border-3 border-primary rounded-top-3">
                 <h2 class="text-center fw-semibold fs-3">Login Parkiran</h2>
             </div>
+            @if (session()->has('loginError') || session()->has('roleError'))
+                <div class="p-4 pb-0 bg-white">
+                    @if (session()->has('loginError'))
+                        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                            {{ session('loginError') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    @if (session()->has('roleError'))
+                        <div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                            {{ session('roleError') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            @endif
             <div class="px-4 pt-4 bg-white rounded-bottom-3">
                 <form action="/login" method="POST">
                     @csrf

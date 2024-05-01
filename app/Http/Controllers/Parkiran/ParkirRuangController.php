@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ParkirRuangController extends Component
 {
-    public $kendaraanMasuk, $kendaraanParkir, $jumlahMasuk;
+    public $kendaraanMasuk, $kendaraanParkir;
     public $ruangParkir, $ruangGroup;
 
 
@@ -31,9 +31,7 @@ class ParkirRuangController extends Component
 
     public function UpdateView()
     {
-        // TODO: Switch when auth ready
-        // $key = 'UpdateKendaraan_' . auth()->user()->id;
-        $key = 'UpdateKendaraan_';
+        $key = 'UpdateKendaraan_' . auth()->user()->id;
         $event = Cache::get($key);
 
         if ($event) 
@@ -60,7 +58,6 @@ class ParkirRuangController extends Component
                                         ->where('status', 'Active')
                                         ->where('ruang_parkir', null)
                                         ->get()->toArray();
-        $this->jumlahMasuk = count($this->kendaraanMasuk);
         
         $this->emit('Update:KendaraanMasuk');
     }

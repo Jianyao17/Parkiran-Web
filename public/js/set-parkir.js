@@ -5,6 +5,7 @@ const m_navtabs = document.querySelector(".scrollable");
 const m_container = document.querySelector(".container-masuk");
 const m_parkiran = document.querySelector("#ruangPrakirTabContent");
 
+const jumlah_masuk = document.querySelector("#jumlah_masuk");
 const db_updating = document.querySelector("#status-Updating");
 const db_updated = document.querySelector("#status-Updated");
 
@@ -22,6 +23,9 @@ AddEventRuangKendaraan(m_container);
 
 function UpdateStatus(ruangGroup)
 {
+    let jumlah = "Kendaraan Masuk : " + Object.keys(m_kendaraanMasuk).length;
+    if (jumlah_masuk.innerHTML != jumlah) jumlah_masuk.innerHTML = jumlah;
+    
     for (let i = 0; i < ruangGroup.length; i++) 
     {
         if (m_status[i] == null) m_status[i] = m_navtabs.querySelector("#status-" + i);

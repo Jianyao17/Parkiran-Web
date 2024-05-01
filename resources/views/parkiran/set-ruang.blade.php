@@ -1,19 +1,19 @@
 <div>
-    <div class="container">
-        <div wire:ignore class="row p-4 justify-content-center">
-            <div id="leftBox" class="col-5 p-2" style="max-width: 40%">
+    <div wire:poll class="container">
+        <div class="row p-4 justify-content-center">
+            <div wire:ignore id="leftBox" class="col-5 p-2" style="max-width: 40%">
                 <h5>Kendaraan Masuk</h5>
                 <div class="nav nav-tabs rounded-top-2 bg-body-tertiary">
-                    <div class="nav-link disabled fw-medium text-dark">Kendaraan Masuk : {{ $jumlahMasuk }}</div>
+                    <div id="jumlah_masuk" class="nav-link disabled fw-medium text-dark">Kendaraan Masuk : </div>
                 </div>
-                <div wire:poll class="tab-content border-start border-end border-bottom rounded-bottom-2"
+                <div class="tab-content border-start border-end border-bottom rounded-bottom-2"
                     style="height: 60vh; overflow-y: auto">
                     <div class="container-masuk d-flex flex-wrap justify-content-start align-content-start p-3 gap-3">
 
                     </div>
                 </div>
             </div>
-            <div wire:poll id="rightBox" class="col-7 p-2" style="max-width: 60%">
+            <div wire:ignore id="rightBox" class="col-7 p-2" style="max-width: 60%">
                 <h5>Ruang Parkir</h5>
                 <ul class="nav nav-tabs scrollable bg-body-tertiary rounded-top-2" id="ruangPrakirTab" role="tablist">
                     @foreach ($ruangParkir as $ruang)

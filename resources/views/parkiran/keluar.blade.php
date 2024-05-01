@@ -41,5 +41,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center">
+            {{ $active_kendaraan->links() }}
+        </div>
     </div>
 </div>

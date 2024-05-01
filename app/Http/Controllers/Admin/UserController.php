@@ -27,15 +27,15 @@ class UserController extends Component
     {
         // Validate data to be created
         $this->validate([ 
-            'username' => 'required|unique:users,name|min:4|max:255',
+            'username' => 'required|unique:users,username|min:4|max:255',
             'password' => 'required|string|min:8|max:255',
+            'no_telp' => 'required|numeric',
             'role' => ['required', Rule::in($this->roles)],
-            'no_telp' => 'required|numeric'
         ]); 
 
         // Create data in database
         User::create([
-            'name' => $this->username,
+            'username' => $this->username,
             'password' => Hash::make($this->password),
             'no_telp' => $this->no_telp,
             'role' => $this->role,
@@ -61,7 +61,7 @@ class UserController extends Component
         }
         
         $this->user_id = $id; 
-        $this->username = $user->name;
+        $this->username = $user->username;
         $this->role = $user->role;
         $this->no_telp = $user->no_telp;
     }
@@ -70,15 +70,15 @@ class UserController extends Component
     {
         // Validate data to be updated
         $this->validate([ 
-            'username' => 'required|min:4|max:255|unique:users,name,'.$this->user_id,
+            'username' => 'required|min:4|max:255|unique:users,username,'.$this->user_id,
             'password' => 'required|min:8|max:255',
+            'no_telp' => 'required|numeric',
             'role' => ['required', Rule::in($this->roles)],
-            'no_telp' => 'required|numeric'
         ]);
         
         // Update data in database
         User::find($this->user_id)->update([
-            'name' => $this->username,
+            'username' => $this->username,
             'password' => Hash::make($this->password),
             'no_telp' => $this->no_telp,
             'role' => $this->role,
@@ -104,7 +104,7 @@ class UserController extends Component
         }
 
         $this->user_id = $id;
-        $this->username = $user->name;
+        $this->username = $user->username;
     }
 
     public function delete()

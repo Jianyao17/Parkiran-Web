@@ -22,7 +22,7 @@
             @foreach ($users as $user)
                 <tr>
                     <th class="align-middle" scope="row">{{ $loop->index + 1 }}</th>
-                    <td class="align-middle fw-normal">{{ $user->name }}</td>
+                    <td class="align-middle fw-normal">{{ $user->username }}</td>
                     <td class="align-middle fst-italic">{{ $user->role }}</td>
                     <td class="align-middle">{{ $user->no_telp }}</td>
                     <td class="align-middle">
