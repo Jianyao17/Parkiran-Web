@@ -1,21 +1,30 @@
 <div class="m-3 my-4">
     <h2 class="text-start">Laporan</h2>
     <p>Laporan Pendapatan Parkiran</p>
-
-    <div class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
-        <select class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="monthFilter">
-            <option value="all">All</option>
-            <option value="january">January</option>
-            <option value="february">February</option>
-            <option value="maret">Maret</option>
+    <button wire:click="report" class="btn btn-primary">Report</button>
+    <div wire:poll class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
+        <select wire:model="bulan" class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="monthFilter">
+            <option value="All" selected>All</option>
+            <option value="01">Januari</option>
+            <option value="02">Februari</option>
+            <option value="03">Maret</option>
+            <option value="04">April</option>
+            <option value="05">Mei</option>
+            <option value="06">Juni</option>
+            <option value="07">Juli</option>
+            <option value="08">Agustus</option>
+            <option value="09">September</option>
+            <option value="10">Oktober</option>
+            <option value="11">November</option>
+            <option value="12">Desember</option>
         </select>
         <div class="col-10 ms-2 rounded-2 shadow-sm">
-            <input type="search" class="form-control" placeholder="Cari Laporan">
+            <input wire:model="search" type="search" id="inputBar" class="form-control" placeholder="Cari Tanggal Laporan : Ctrl+/">
         </div>
     </div>
 
     {{-- Laporan Table --}}
-    <table class="table table-hover">
+    <table wire:poll class="table table-hover">
         <thead class="table-light">
             <tr>
                 <th scope="col">#</th>
@@ -25,102 +34,17 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr>
-                <th scope="row">1</th>
-                <td>13/04/2024</td>
-                <td>200</td>
-                <td>Rp 2.000.000</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>14/05/2024</td>
-                <td>124</td>
-                <td>Rp 1.335.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>16/06/2024</td>
-                <td>213</td>
-                <td>Rp 2.123.000</td>
-            </tr>
+            @foreach ($list_laporan as $laporan)
+                <tr>
+                    <th scope="row">{{ $loop->index + 1 }}</th>
+                    <td class="align-middle">{{ $laporan->tgl_laporan->format('d-M-Y') }}</td>
+                    <td class="align-middle">{{ $laporan->jumlah_kendaraan }}</td>
+                    <td class="align-middle">Rp. {{ number_format($laporan->pendapatan_rp, 2) }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $list_laporan->links() }}
+    </div>
 </div>

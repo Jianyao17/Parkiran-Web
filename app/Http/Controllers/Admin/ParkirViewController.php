@@ -14,8 +14,6 @@ class ParkirViewController extends Component
 
     public $waktu, $status, $search;
 
-    protected $listeners = [ 'update_masuk' => 'render', 'update_keluar' => 'render' ];
-
 
     public function mount()
     {
@@ -50,7 +48,7 @@ class ParkirViewController extends Component
         if ($this->status != 'All') 
             $kendaraan->where('status', $this->status);
         
-        $list_kendaraan = $kendaraan->orderBy('waktu_masuk', 'desc')->paginate(30);
+        $list_kendaraan = $kendaraan->orderBy('status')->orderBy('waktu_masuk', 'desc')->paginate(30);
 
         return view('admin.parkir-view', ['list_kendaraan' => $list_kendaraan])
             ->extends('_layouts.base-admin', ['page' => 'Parkiran']);

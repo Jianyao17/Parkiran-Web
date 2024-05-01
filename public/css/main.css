@@ -44,16 +44,16 @@ body {
 }
 
 .kendaraan {
-    min-width: 75px;
-    max-height: 75px;
+    min-width: 74px;
+    max-height: 74px;
 }
 
 .slot-parkir {
     background-color: rgba(var(--bs-tertiary-bg-rgb));
 
     position: relative;
-    min-width: 75px;
-    min-height: 75px;
+    min-width: 76px;
+    min-height: 76px;
     flex: none;
     z-index: 0;
 }

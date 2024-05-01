@@ -12,7 +12,8 @@
             <option value="Tahun Ini">Tahun Ini</option>
         </select>
         <div class="col-8 mx-2 rounded-2 shadow-sm">
-            <input wire:model="search" type="search" class="form-control" placeholder="Cari History Parkir Kendaraan">
+            <input wire:model="search" type="search" id="inputBar" class="form-control" 
+                oninput="this.value = this.value.toUpperCase()" placeholder="Cari History Parkir Kendaraan : Ctrl+/">
         </div>
         <select wire:model="status" class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="statusFilter">
             <option value="All" selected>All</option>
@@ -43,25 +44,13 @@
                     <td class="align-middle">
                         @if ($kendaraan->waktu_masuk != null)
                             {{ $kendaraan->waktu_masuk->format('H:i') }} | 
-                            @if ($kendaraan->waktu_masuk->isToday())
-                                Hari Ini
-                            @elseif ($kendaraan->waktu_masuk->isYesterday())
-                                Kemarin
-                            @else
-                                {{ $kendaraan->waktu_masuk->format('d-M-Y') }}
-                            @endif
+                            {{ $kendaraan->waktu_masuk->format('d-M-Y') }}
                         @endif
                     </td>
                     <td class="align-middle">
                         @if ($kendaraan->waktu_keluar != null)
                             {{ $kendaraan->waktu_keluar->format('H:i') }} | 
-                            @if ($kendaraan->waktu_keluar->isToday())
-                                Hari Ini
-                            @elseif ($kendaraan->waktu_keluar->isYesterday())
-                                Kemarin
-                            @else
-                                {{ $kendaraan->waktu_keluar->format('d-M-Y') }}
-                            @endif
+                            {{ $kendaraan->waktu_keluar->format('d-M-Y') }}
                         @endif
                     </td>
                     <td class="align-middle">Rp. {{ number_format($kendaraan->biaya, 2) }}</td>
@@ -76,18 +65,6 @@
                     @endif
                 </tr>
             @endforeach
-            <tr>
-                <th class="align-middle" scope="row">17</th>
-                <td class="align-middle fw-bold">K124</td>
-                <td class="align-middle fst-italic">Lantai-2 | B2</td>
-                <td class="align-middle">28/05/2024 - 08:53</td>
-                <td class="align-middle">28/05/2024 - 13:28</td>
-                <td class="align-middle">Rp 20.000</td>
-                <td class="align-middle fw-medium text-primary">
-                    <i class="bi bi-square-fill me-1"></i>
-                    Finished
-                </td>
-            </tr>
         </tbody>
     </table>
     <div class="d-flex justify-content-center">

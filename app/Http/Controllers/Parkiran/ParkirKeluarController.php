@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Parkiran;
 
+use App\Events\OnKendaraanUpdate;
 use App\Models\Kendaraan;
+use App\Models\RuangParkir;
 use Livewire\Component;
 
 class ParkirKeluarController extends Component
@@ -35,16 +37,23 @@ class ParkirKeluarController extends Component
         $waktu_parkir = $kendaraan->waktu_masuk->diffInHours(now());
         $biaya = ($waktu_parkir >= 1) ? $waktu_parkir * 2000.0 : 0.0;
 
+        if ($kendaraan->ruang_parkir) 
+        {
+            RuangParkir::where('kode_ruang', $kendaraan->ruang_parkir)
+                        ->update(['status' => 'kosong']);
+        }
+
         $kendaraan->update([
             'status' => 'Finished',
             'waktu_keluar' => now(),
             'biaya' => $biaya,
         ]);
-
+        
         $this->resetValue();
-        $this->emit('update_keluar');
         $this->dispatchBrowserEvent('notify', 
         [ 'type' => 'success', 'message' => 'Kendaraan Berhasil Dikeluarkan']);
+        
+        OnKendaraanUpdate::dispatch();
     }
 
     private function resetValue()

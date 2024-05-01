@@ -42,11 +42,10 @@
             </div>
             <div class="d-flex">
                 <div class="d-flex flex-row border rounded p-1 px-2 mx-2">
-                    <i class="bi bi-person d-flex justify-content-center align-items-center"
-                        style="font-size: 220%"></i>
+                    <i class="bi bi-person-workspace me-1 d-flex justify-content-center align-items-center"
+                        style="font-size: 200%"></i>
                     <div class="mx-2 d-flex flex-column justify-content-center">
-                        <div class="fw-bold lh-sm" style="font-size: 90%"> {{ $user->name ?? 'Arief Wiradrama Tan' }}
-                        </div>
+                        <div class="fw-bold lh-sm" style="font-size: 90%"> {{ $user->name ?? 'Arief Wiradrama Tan' }}</div>
                         <div class="lh-sm" style="font-size: 80%"> Role : {{ $user->role ?? 'Admin' }} </div>
                     </div>
                 </div>
@@ -91,6 +90,7 @@
     {{-- JQuery Script --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/js/shortcuts.js"></script>
     <script>
         const toastElement = document.getElementById('liveToast');
 
@@ -105,7 +105,11 @@
 
             document.getElementById('message').innerHTML = event.detail.message;
             toastBootstrap.show();
-        })
+        });
+
+        // Tooltips
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     </script>
     @livewireScripts
 </body>

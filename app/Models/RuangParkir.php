@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Mavinoo\Batch\Traits\HasBatch;
 
@@ -42,6 +43,45 @@ class RuangParkir extends Model
             ];
         }
         return collect($ruang_parkir)->sortBy('nama_ruang')->values()->all();
+    }
+
+    public static function GetRuangParkir()
+    {
+        $group_ruang = self::all()->unique('nama_ruang');
+        $ruangParkir = [];
+
+        foreach ($group_ruang as $ruang) 
+        {
+            $list_kode = self::select('kode_ruang')
+                            ->where('kode_ruang', 'like', '%' . $ruang['kode_ruang'][0] . '%')->get()
+                            ->sortBy('kode_ruang', SORT_NATURAL)->pluck('kode_ruang')->toArray();
+
+            $ruangParkir[] = [
+                'nama_ruang' => $ruang['nama_ruang'],
+                'list_kode' => $list_kode,
+            ];
+        }
+        return $ruangParkir;
+    }
+
+    public static function GetRuangGroup()
+    {
+        $group_ruang = self::get()->countBy('nama_ruang');
+        $ruangan = [];
+
+        foreach ($group_ruang as $ruang => $kapasitas) 
+        {
+            $terpakai = self::where('nama_ruang', $ruang)
+                            ->where('status', 'terisi')
+                            ->get()->count();
+
+            $ruangan[] = [
+                'nama_ruang' => $ruang,
+                'kapasitas' => $kapasitas,
+                'terpakai' => $terpakai,
+            ];
+        }
+        return $ruangan;
     }
 
     public static function StoreRuang($nama, $kode, $kapasitas) 

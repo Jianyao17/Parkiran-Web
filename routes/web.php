@@ -34,5 +34,7 @@ Route::get('/parkiran', ParkirViewController::class);
 
 
 Route::get('/parkiran/masuk', ParkirMasukController::class);
+
 Route::get('/parkiran/keluar', ParkirKeluarController::class);
+
 Route::get('/parkiran/set-ruang', ParkirRuangController::class);

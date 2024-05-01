@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Parkiran;
 
+use App\Events\OnKendaraanUpdate;
 use App\Models\Kendaraan;
 use App\Models\RuangParkir;
 use Livewire\Component;
@@ -15,9 +16,9 @@ class ParkirMasukController extends Component
     {
         $this->terakhir_ditambahkan = Kendaraan::latest('waktu_masuk')->where('status', 'Active')->take(10)->get();
 
-        $kapasitas = RuangParkir::where('status', 'kosong')->count();
+        $kapasitas = RuangParkir::all()->count();
         $terpakai = RuangParkir::where('status', 'terisi')->count();
-        $this->ruang_tersisa = ['kapasitas' => $kapasitas, 'terpakai' => $terpakai];
+        $this->ruang_tersisa = ['terpakai' => $terpakai, 'kapasitas' => $kapasitas];
 
         return view('parkiran.masuk')
             ->extends('_layouts.base', ['page' => 'Parkir Masuk']);
@@ -34,9 +35,10 @@ class ParkirMasukController extends Component
         ]);
 
         $this->resetValue();
-        $this->emit('update_masuk');
         $this->dispatchBrowserEvent('notify', 
         [ 'type' => 'success', 'message' => 'Kendaraan Berhasil Ditambahkan']);
+        
+        OnKendaraanUpdate::dispatch();
     }
 
     private function resetValue()
