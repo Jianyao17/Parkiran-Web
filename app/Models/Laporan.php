@@ -43,11 +43,16 @@ class Laporan extends Model
         $jumlah_biaya_rp = Kendaraan::where('status', 'Finished')
                                     ->whereDate('waktu_keluar', Carbon::today())
                                     ->sum('biaya');
+        
+        $laporan = self::updateOrInsert(
+            ['tgl_laporan' => Carbon::today()],
+            [
+                'tgl_laporan' => Carbon::now(),
+                'jumlah_kendaraan' => $jumlah_kendaraan,
+                'pendapatan_rp' => $jumlah_biaya_rp,
+            ]
+        );
 
-        self::create([
-            'tgl_laporan' => Carbon::now(),
-            'jumlah_kendaraan' => $jumlah_kendaraan,
-            'pendapatan_rp' => $jumlah_biaya_rp,
-        ]);
+        return $laporan ? true : false;
     }
 }

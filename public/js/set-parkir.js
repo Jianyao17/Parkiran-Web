@@ -169,7 +169,6 @@ function InsertKendaraan(ruang, kendaraan)
     function InsertOrUpdateDataArray() 
     {
         let isContains = (x) => x.plat_kendaraan == plat.innerHTML;
-        current_data.splice(0, current_data.length);
         
         let data = {
             plat_kendaraan: plat.innerHTML,
@@ -253,15 +252,16 @@ function AddEventKendaraan(kendaraan) {
 function UpdateDatabase(livewire)
 {    
     // Return if drag event OR no data changes
-    if (isDragging || isUpdated == false) return;
+    if (isUpdated == false) return;
     
     db_updating.classList.remove("visually-hidden");
     db_updated.classList.add("visually-hidden");
-    console.log("Update");
+    console.log("Updated");
 
     livewire.UpdateDatabase(current_data).then(() => { 
         db_updating.classList.add("visually-hidden");
         db_updated.classList.remove("visually-hidden");
+        current_data.splice(0, current_data.length);
     });
     isUpdated = false;
 }

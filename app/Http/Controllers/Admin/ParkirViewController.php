@@ -26,6 +26,8 @@ class ParkirViewController extends Component
         $kendaraan = Kendaraan::query();
         $kendaraan->where('plat_kendaraan', 'like', '%' . $this->search . '%');
 
+        if ($this->status != 'All') $kendaraan->where('status', $this->status);
+        
         switch ($this->waktu) 
         {
             case 'Hari Ini' : 
@@ -35,18 +37,15 @@ class ParkirViewController extends Component
                 $kendaraan->whereDate('waktu_masuk', Carbon::yesterday());
                 break;
             case 'Minggu Ini' : 
-                $kendaraan->whereDate('waktu_masuk', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                $kendaraan->whereBetween('waktu_masuk', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
                 break;
             case 'Bulan Ini' :
-                $kendaraan->whereDate('waktu_masuk', [Carbon::now()->startOfMonth(), Carbon::now()]);
+                $kendaraan->whereBetween('waktu_masuk', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()]);
                 break;
             case 'Tahun Ini' :
-                $kendaraan->whereDate('waktu_masuk', [Carbon::now()->startOfYear(), Carbon::now()]);
+                $kendaraan->whereBetween('waktu_masuk', [Carbon::now()->startOfYear(), Carbon::now()->endOfYear()]);
                 break;
         }
-
-        if ($this->status != 'All') 
-            $kendaraan->where('status', $this->status);
         
         $list_kendaraan = $kendaraan->orderBy('status')->orderBy('waktu_masuk', 'desc')->paginate(30);
 

@@ -62,12 +62,17 @@
         <script>
             
             let m_livewire = null;
+            let m_updateTimeout = null;
 
             document.addEventListener("livewire:load", () => { 
                 m_livewire = @this;
 
+                document.addEventListener("drag", function() { clearTimeout(m_updateTimeout); });
+                document.addEventListener("dragend", function() { 
+                    m_updateTimeout = setTimeout(() => { UpdateDatabase(m_livewire); }, 1500);
+                });
+
                 // Update Every 1 Seconds
-                setInterval(() => { UpdateDatabase(m_livewire); }, 1000);
                 setInterval(() => { UpdateStatus(m_livewire.ruangGroup); }, 500);
                 
                 // First inizialized

@@ -1,9 +1,15 @@
 <div class="m-3 my-4">
-    <h2 class="text-start">Laporan</h2>
-    <p>Laporan Pendapatan Parkiran</p>
-    <button wire:click="report" class="btn btn-primary">Report</button>
+    <div class="d-flex flex-row justify-content-between">
+        <div>
+            <h2 class="text-start">Laporan</h2>
+            <p>Laporan Pendapatan Parkiran</p>
+        </div>
+        <button wire:click="report" class="btn btn-primary my-4">
+            <i class="bi bi-file-earmark-plus me-2"></i>Buat Laporan
+        </button>
+    </div>
     <div wire:poll class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
-        <select wire:model="bulan" class="flex-grow-0 form-select bg-body-tertiary shadow-sm" id="monthFilter">
+        <select wire:model="bulan" class="form-select bg-body-tertiary shadow-sm" id="monthFilter" style="width: 32%">
             <option value="All" selected>All</option>
             <option value="01">Januari</option>
             <option value="02">Februari</option>
@@ -18,8 +24,16 @@
             <option value="11">November</option>
             <option value="12">Desember</option>
         </select>
-        <div class="col-10 ms-2 rounded-2 shadow-sm">
+        <div class="col-7 mx-2 rounded-2 shadow-sm">
             <input wire:model="search" type="search" id="inputBar" class="form-control" placeholder="Cari Tanggal Laporan : Ctrl+/">
+        </div>
+        <div class="input-group bg-body-tertiary shadow-sm" style="width: 70%">
+            <span class="input-group-text">Order By</span>
+            <select wire:model="orderBy" class="form-select" id="orderBy">
+                <option value="tgl_laporan" selected>Tanggal Laporan</option>
+                <option value="jumlah_kendaraan">Jumlah Kendaraan</option>
+                <option value="pendapatan_rp">Pendapatan</option>
+            </select>
         </div>
     </div>
 

@@ -48,6 +48,12 @@ body {
     max-height: 74px;
 }
 
+.kendaraan:hover {
+    scale: 110%;
+    cursor: pointer;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.15);
+}
+
 .slot-parkir {
     background-color: rgba(var(--bs-tertiary-bg-rgb));
 
