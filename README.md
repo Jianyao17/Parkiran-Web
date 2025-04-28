@@ -49,11 +49,22 @@ Sistem Parkiran Berbasis Web dengan Laravel Livewire + Bootstrap
      DB_PASSWORD=
      ```
 
-6. **Migrasi database**
+6. **Migrasi & Seed database**
+   
+   Database akan dimigrasi dan Seeder akan membuat user **sementara** di database pada masing-masing role.
 
    ```bash
-   php artisan migrate
+   php artisan migrate:fresh --seed
    ```
+
+   ##### 🛠️ Data User yang Dibuat
+
+   | Role             | Username         | Password    |
+   |------------------|------------------|-------------|
+   | Admin            | admin             | admin123    |
+   | Petugas-Masuk    | petugas_masuk     | masuk123    |
+   | Petugas-Ruang    | petugas_ruang     | ruang123    |
+   | Petugas-Keluar   | petugas_keluar    | keluar123   |
 
 7. **Install dependencies JavaScript**
 
