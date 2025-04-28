@@ -44,9 +44,9 @@ Sistem Parkiran Berbasis Web dengan Laravel Livewire + Bootstrap
      DB_CONNECTION=mysql
      DB_HOST=127.0.0.1
      DB_PORT=3306
-     DB_DATABASE=nama_database
-     DB_USERNAME=username
-     DB_PASSWORD=password
+     DB_DATABASE=parkiran_web
+     DB_USERNAME=root
+     DB_PASSWORD=
      ```
 
 6. **Migrasi database**
@@ -67,8 +67,8 @@ Sistem Parkiran Berbasis Web dengan Laravel Livewire + Bootstrap
    npm run build
    ```
 
-  > [!TIP]  
-  > Untuk development, gunakan `npm run dev` agar perubahan frontend otomatis ter-update.
+      > [!TIP]  
+      > Untuk development, gunakan `npm run dev` agar perubahan frontend otomatis ter-update.
 
 9. **Jalankan server lokal**
 
