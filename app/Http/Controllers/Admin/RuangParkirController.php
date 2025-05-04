@@ -24,7 +24,7 @@ class RuangParkirController extends Component
     {
         // Validate Ruang Parkir Attribute
         $this->validate([
-            'nama_ruang' => 'min:4|max:255|unique:ruang_parkir,nama_ruang',
+            'nama_ruang' => 'required|min:4|max:255|unique:ruang_parkir,nama_ruang',
             'kode_ruang' => 'required|string|min:1|max:255',
             'kapasitas' => 'required|gt:0'
         ]);
