@@ -92,3 +92,28 @@ Sistem Parkiran Berbasis Web dengan Laravel Livewire + Bootstrap
     ```
     http://127.0.0.1:8000
     ```
+
+---
+
+#### 📸 Screenshots
+
+##### Halaman Login
+![Halaman Login](public/img/page_login.jpg)
+
+##### Dashboard Admin - Parkiran
+![Dashboard Admin - Parkiran](public/img/page_admin-parkiran.png)
+
+##### Dashboard Admin - Ruang Parkir
+![Dashboard Admin - Ruang Parkir](public/img/page_admin-ruang-parkir.png)
+
+##### Dashboard Admin - User
+![Dashboard Admin - User](public/img/page_admin-user.png)
+
+##### Halaman Parkir Masuk
+![Halaman Parkir Masuk](public/img/page_parkir-masuk.png)
+
+##### Halaman Parkir Keluar
+![Halaman Parkir Keluar](public/img/page_parkir-keluar.png)
+
+##### Halaman Ruang Parkir
+![Halaman Ruang Parkir](public/img/page_ruang-parkir.png)
