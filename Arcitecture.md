@@ -2,23 +2,6 @@
 
 Dokumen ini merangkum alur pengembangan aplikasi parkiran web, mulai dari entitas database, use case tiap actor, sampai struktur halaman dan endpoint yang dipakai.
 
-## Diagram Alur Actor
-
-```mermaid
-flowchart TD
-    A[Guest] --> B[Login]
-    B --> C{Role user}
-    C -->|Admin| D["/parkiran/"]
-    C -->|Petugas-Masuk| E["/parkiran/masuk"]
-    C -->|Petugas-Keluar| F["/parkiran/keluar"]
-    C -->|Petugas-Ruang| G["/parkiran/set-ruang"]
-
-    D --> H[Kelola user, laporan, ruang parkir, dan data parkir]
-    E --> I[Catat kendaraan masuk]
-    F --> J[Proses kendaraan keluar]
-    G --> K[Atur penempatan ruang parkir]
-```
-
 ## Entitas Database
 
 - `kendaraan.ruang_parkir` menyimpan kode dari `ruang_parkir.kode_ruang`.
@@ -160,6 +143,24 @@ flowchart LR
     PK[Petugas Keluar] --> PK1[Input kendaraan keluar]
     PR[Petugas Ruang] --> PR1[Atur ruang parkir]
 ```
+
+## Diagram Alur Actor
+
+```mermaid
+flowchart TD
+    A[Guest] --> B[Login]
+    B --> C{Role user}
+    C -->|Admin| D["/parkiran/"]
+    C -->|Petugas-Masuk| E["/parkiran/masuk"]
+    C -->|Petugas-Keluar| F["/parkiran/keluar"]
+    C -->|Petugas-Ruang| G["/parkiran/set-ruang"]
+
+    D --> H[Kelola user, laporan, ruang parkir, dan data parkir]
+    E --> I[Input kendaraan masuk]
+    F --> J[Proses kendaraan keluar]
+    G --> K[Atur penempatan kendaraan di ruang parkir]
+```
+
 
 ## Struktur Halaman dan Endpoint
 
