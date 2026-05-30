@@ -4,9 +4,21 @@
             <h2 class="text-start">Laporan</h2>
             <p>Laporan Pendapatan Parkiran</p>
         </div>
-        <button wire:click="report" class="btn btn-primary my-4">
-            <i class="bi bi-file-earmark-plus me-2"></i>Buat Laporan
-        </button>
+        <div class="d-flex gap-2 my-4">
+            <button wire:click="downloadLaporan" class="btn btn-success">
+                <i class="bi bi-download me-2"></i>Download CSV
+            </button>
+            <a
+                href="{{ route('laporan.download.pdf', ['bulan' => $bulan, 'orderBy' => $orderBy, 'search' => $search]) }}"
+                class="btn btn-danger"
+                target="_blank"
+            >
+                <i class="bi bi-file-earmark-pdf me-2"></i>Download PDF
+            </a>
+            <button wire:click="report" class="btn btn-primary">
+                <i class="bi bi-file-earmark-plus me-2"></i>Buat Laporan
+            </button>
+        </div>
     </div>
     <div wire:poll class="py-3 d-flex justify-content-start position-sticky sticky-searchbar">
         <select wire:model="bulan" class="form-select bg-body-tertiary shadow-sm" id="monthFilter" style="width: 32%">

@@ -36,6 +36,7 @@ Route::middleware(['auth', 'user-role:Admin'])->group(function() {
     Route::get('/laporan', LaporanController::class);
     Route::get('/ruang-parkir', RuangParkirController::class);
     Route::get('/parkiran', ParkirViewController::class);
+    Route::get('/laporan/download/pdf', [LaporanController::class, 'downloadPdfLaporan'])->name('laporan.download.pdf');
 });
 
 // Petugas Masuk Route
